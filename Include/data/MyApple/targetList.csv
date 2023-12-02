@@ -1,0 +1,5 @@
+url,handle,description
+/page1.html,By.xpath: //img[@id='apple'],the source
+/page2.html,By.xpath: //img[@id='apple'],resized
+/page3.html,By.xpath: //img[@id='apple'],lorem ipsum
+/page4.html,By.xpath: //img[@id='apple'],rotated

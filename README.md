@@ -29,4 +29,4 @@ If you look at these 2 web sites and compare each pair of pages, you would notic
 - [myApple/page4.html](https://kazurayam.github.io/myApple/page4.html) vs [myApple-alt/page4.html](https://kazurayam.github.io/myApple-alt/page4.html) are different
 
 I want to compile a report which includes the screenshots of `<img>` elements in the pages.
-I want to show the report to my team and want to discuss what we should do.
+I want to show the report to my team and want to discuss what we should do next.
