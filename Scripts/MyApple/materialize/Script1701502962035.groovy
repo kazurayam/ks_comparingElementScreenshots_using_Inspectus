@@ -4,8 +4,8 @@ import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
 import java.nio.file.Path
 import java.nio.file.Paths
 
-import com.kazurayam.inspectus.materialize.discovery.Sitemap
-import com.kazurayam.inspectus.materialize.discovery.SitemapLoader
+import com.kazurayam.inspectus.materialize.discovery.Sitemap2
+import com.kazurayam.inspectus.materialize.discovery.SitemapLoader2
 import com.kazurayam.inspectus.materialize.discovery.Target
 import com.kazurayam.ks.globalvariable.ExecutionProfilesLoader
 import com.kms.katalon.core.configuration.RunConfiguration
@@ -29,7 +29,7 @@ List<Target> targetList = getTargetList(executionProfile)
 
 WebUI.comment("targetList.size()=" + targetList.size())
 
-WebUI.callTestCase(findTestCase("Test Cases/MyAdmin/processTargetList"),
+WebUI.callTestCase(findTestCase("Test Cases/MyApple/processTargetList"),
 						[
 							"store": store,
 							"jobName": jobName,
@@ -43,27 +43,27 @@ WebUI.callTestCase(findTestCase("Test Cases/MyAdmin/processTargetList"),
  */
 List<Target> getTargetList(String executionProfile) {
 	
-	// utility class that loads specified Execution Profiles to make the GlobalVariable.CSV accessible
+	// utility class that loads specified Execution Profiles to make the GlobalVariable.SITEMAP accessible
 	ExecutionProfilesLoader profilesLoader = new ExecutionProfilesLoader()
 	profilesLoader.loadProfile(executionProfile)
 	
-	WebUI.comment("GlobalVariable.topPageURL=" + GlobalVariable.topPageURL)
-	WebUI.comment("GlobalVariable.CSV=" + GlobalVariable.CSV)
+	WebUI.comment("GlobalVariable.URL_PREFIX=" + GlobalVariable.URL_PREFIX)
+	WebUI.comment("GlobalVariable.SITEMAP=" + GlobalVariable.SITEMAP)
 	
-	// identify the URL of the top page
-	Target topPage = Target.builder(GlobalVariable.topPageURL).build()
+	// identify the sitemap file
+	Path sitemapFile = Paths.get(RunConfiguration.getProjectDir()).resolve(GlobalVariable.SITEMAP)
 	
-	// identify the target CSV file
-	Path csvFile = Paths.get(RunConfiguration.getProjectDir()).resolve(GlobalVariable.CSV)
+	// create the variable bindings
+	Map<String, String> bindings = new HashMap<>()
+	bindings.put("URL_PREFIX", GlobalVariable.URL_PREFIX)
 	
 	// create an instance of Sitemap
-	SitemapLoader loader = new SitemapLoader(topPage)
-	loader.setWithHeaderRecord(true)
-	Sitemap sitemap = loader.parseCSV(csvFile)
+	SitemapLoader2 loader = new SitemapLoader2()
+	Sitemap2 sitemap = loader.loadSitemapJson(sitemapFile, bindings)
 	
 	WebUI.comment("sitemap.size()=" + sitemap.size())
 	assert sitemap.size() > 0
 	
 	// return the list or targets
-	return sitemap.getBaseTargetList()
+	return sitemap.getTargetList()
 }

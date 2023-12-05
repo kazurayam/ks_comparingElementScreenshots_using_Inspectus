@@ -6,12 +6,12 @@
    <defaultProfile>false</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'https://kazurayam.github.com/myApple/'</initValue>
-      <name>topPageURL</name>
+      <initValue>'https://kazurayam.github.io/myApple'</initValue>
+      <name>URL_PREFIX</name>
    </GlobalVariableEntity>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'Include/data/MyApple/targetList.csv'</initValue>
-      <name>CSV</name>
+      <initValue>'Include/data/MyApple/sitemap.json'</initValue>
+      <name>SITEMAP</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

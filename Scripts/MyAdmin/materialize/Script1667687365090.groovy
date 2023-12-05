@@ -42,18 +42,18 @@ WebUI.callTestCase(findTestCase("Test Cases/MyAdmin/processTargetList"),
  */
 List<Target> getTargetList(String executionProfile) {
 	
-	// utility class that loads specified Execution Profiles to make the GlobalVariable.CSV accessible
+	// utility class that loads specified Execution Profiles to make the GlobalVariable.SITEMAP accessible
 	ExecutionProfilesLoader profilesLoader = new ExecutionProfilesLoader()
 	profilesLoader.loadProfile(executionProfile)
 	
-	WebUI.comment("GlobalVariable.topPageURL=" + GlobalVariable.topPageURL)
-	WebUI.comment("GlobalVariable.CSV=" + GlobalVariable.CSV)
+	WebUI.comment("GlobalVariable.URL_PREFIX=" + GlobalVariable.URL_PREFIX)
+	WebUI.comment("GlobalVariable.SITEMAP=" + GlobalVariable.SITEMAP)
 	
 	// identify the URL of the top page
-	Target topPage = Target.builder(GlobalVariable.topPageURL).build()
+	Target topPage = Target.builder(GlobalVariable.URL_PREFIX).build()
 	
 	// identify the target CSV file
-	Path csvFile = Paths.get(RunConfiguration.getProjectDir()).resolve(GlobalVariable.CSV)
+	Path csvFile = Paths.get(RunConfiguration.getProjectDir()).resolve(GlobalVariable.SITEMAP)
 	
 	// create an instance of Sitemap
 	SitemapLoader loader = new SitemapLoader(topPage)
